@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Joel Starter App</title>
+    <meta name="description" content="Offline‑fähige Notizen-App (PWA) mit Suche & Darkmode." />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#0078ff" />
+    <link rel="icon" sizes="192x192" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img src="icons/icon-192.png" alt="App Icon" class="logo">
+        <h1>Joel Starter App</h1>
+      </div>
+      <div class="controls">
+        <input id="search" type="search" placeholder="Suchen … (Titel/Inhalt)" aria-label="Notizen durchsuchen" />
+        <button id="themeToggle" title="Hell/Dunkel umschalten" aria-label="Darkmode umschalten">🌙</button>
+        <button id="exportBtn" title="Notizen exportieren">⬇️</button>
+        <button id="importBtn" title="Notizen importieren">⬆️</button>
+        <input id="importFile" type="file" accept="application/json" hidden />
+      </div>
+    </header>
+
+    <main>
+      <section class="new-note">
+        <input id="noteTitle" type="text" placeholder="Titel" aria-label="Notiztitel" />
+        <textarea id="noteBody" rows="4" placeholder="Deine Notiz …" aria-label="Notizinhalt"></textarea>
+        <button id="addNote">+ Notiz hinzufügen</button>
+      </section>
+
+      <section>
+        <ul id="notes" class="notes"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <small>Offline‑fähig. Installierbar als App. – Made for Joel ✨</small>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./service-worker.js');
+        });
+      }
+    </script>
+  </body>
+</html>
